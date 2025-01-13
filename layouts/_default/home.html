@@ -1,0 +1,56 @@
+{{ define "cssblock" }}
+<link rel="shortcut icon" href="/favicon.ico">
+{{- with resources.Get "css/main.css" }}
+{{- if eq hugo.Environment "development" }}
+<link rel="stylesheet" href="{{ .RelPermalink }}">
+{{- else }}
+{{- with . | minify | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+{{- end }}
+{{- end }}
+{{- end }}
+{{ end }}
+
+{{ define "main" }}
+
+<article>
+  <h1 id="tufte-css">Welcome to apsan.xyz,</h1>
+  <p class="subtitle">Brought to you by Apsan Century</p>
+  <div class="update-wrapper">
+  <div class="fancy-update">
+    <p class="text-update">New Update: </p>
+    <button class="fancy-update__btn"><a href="#">CLM Project</a></button>
+  </div></div>
+
+  <section class="coding-card">
+  <p class="ul-title">Coding Projects</p>
+  <ul class="pro-title">
+    <button class="btn-update"><li>Ricing Files <br>(Neovim, Zsh, Alacritty) </li></button>
+    <button class="btn-update"><li>Apsanxyz <br>(Hugo, CSS)</li></button>
+    <button class="btn-update"><li>NepaliProject</li></button>
+    <button class="btn-update"><li>ProjectTracker <br>(Java)</li></button>
+  </ul></section>
+
+  <span id="toggleImage" class="image-toggle">show image</span>
+  <div id="imageContainer">
+    <img id="magicalImage" src="showi.webp" alt="Magical Image">
+  </div>
+
+  <p class="ul-title">Posts</p>
+<!--  {{ $paginator := .Paginate (where .Site.RegularPages "Type" "projects") }}-->
+
+  <div class="posts-list">
+    {{ range .Pages }}
+    <div class="post-item">
+      <div class="post-date">{{ .Date.Format "02 Jan 06" }}</div>
+      <div class="post-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+
+
+
+</article>
+{{ end }}

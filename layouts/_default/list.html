@@ -1,0 +1,12 @@
+{{ define "cssblock" }}
+  <link rel="stylesheet" href="{{ "css/style1.css" | absURL }}">
+{{ end }}
+
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  {{ range .Pages }}
+    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+    {{ .Summary }}
+  {{ end }}
+{{ end }}
